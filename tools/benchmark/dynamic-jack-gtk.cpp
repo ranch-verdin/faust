@@ -39,6 +39,7 @@
 #include "faust/audio/jack-dsp.h"
 #include "faust/dsp/llvm-dsp.h"
 #include "faust/dsp/interpreter-dsp.h"
+// #include "faust/dsp/interpreter-machine-dsp.h"
 #include "faust/dsp/dsp-adapter.h"
 #include "faust/dsp/proxy-dsp.h"
 #include "faust/dsp/poly-dsp.h"
@@ -185,17 +186,17 @@ int main(int argc, char* argv[])
         printList(factory->getIncludePathnames());
         */
         
-    } else {
-        cout << "Using interpreter backend" << endl;
-        // argc : without the filename (last element);
-        factory = createInterpreterDSPFactoryFromFile(argv[argc-1], argc1, argv1, error_msg);
+    }//  else {
+    //     cout << "Using interpreter backend" << endl;
+    //     // argc : without the filename (last element);
+    //     factory = createInterpreterDSPFactoryFromFile(argv[argc-1], argc1, argv1, error_msg);
         
-        if (!factory) {
-            cerr << "Cannot create factory : " << error_msg;
-            cout << "Trying to use createInterpreterDSPFactoryFromFile..." << endl;
-            factory = readInterpreterDSPFactoryFromBitcodeFile(argv[argc-1], error_msg);
-        }
-    }
+    //     if (!factory) {
+    //         cerr << "Cannot create factory : " << error_msg;
+    //         cout << "Trying to use createInterpreterDSPFactoryFromFile..." << endl;
+    //         factory = readInterpreterDSPFactoryFromBitcodeFile(argv[argc-1], error_msg);
+    //     }
+    // }
     
     if (!factory) {
         cerr << "Cannot create factory : " << error_msg;
@@ -311,9 +312,9 @@ int main(int argc, char* argv[])
   
     if (is_llvm) {
         deleteDSPFactory(static_cast<llvm_dsp_factory*>(factory));
-    } else {
-        deleteInterpreterDSPFactory(static_cast<interpreter_dsp_factory*>(factory));
-    }
+    }//  else {
+    //     deleteInterpreterDSPFactory(static_cast<interpreter_dsp_factory*>(factory));
+    // }
     
     return 0;
 }
